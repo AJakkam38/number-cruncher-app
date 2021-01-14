@@ -6,7 +6,8 @@ import pymysql.cursors
 
 
 # Connect to the database
-connection = pymysql.connect(host='db',
+connection = pymysql.connect(port=3306,
+                             host='db',
                              user='jakkam',
                              password='password',
                              db='calculations',
