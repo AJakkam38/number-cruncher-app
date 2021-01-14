@@ -29,10 +29,10 @@ tr:nth-child(even) {
         <div class="col-lg-2">
             <select id="selectOperation" name="operation" class="form-control" required>
                 <option value="">Select...</option>
-                <option value="addition">+</option>
-                <option value="subtract">-</option>
-                <option value="multiply">x</option>
-                <option value="divide">/</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="x">x</option>
+                <option value="/">/</option>
             </select>
         </div>
 
@@ -56,7 +56,6 @@ tr:nth-child(even) {
     
     <div class="container">
         <table style="width:100%">
-            <caption>Recent Calculations</caption>
             <tr>
                 <th>Input-1</th>
                 <th>Operator</th>
@@ -66,10 +65,10 @@ tr:nth-child(even) {
 
             {% for result in results %}
             <tr>
-                <td>{{result[1]}}</td>
-                <td>{{result[2]}}</td>
-                <td>{{result[3]}}</td>
-                <td>{{result[4]}}</td>
+                <td>{{result['first_num']}}</td>
+                <td>{{result['operator']}}</td>
+                <td>{{result['second_num']}}</td>
+                <td>{{result['result']}}</td>
             </tr>
             {% endfor %}
 

@@ -19,10 +19,10 @@ connection = pymysql.connect(port=3306,
 def get_calculations():
     data = ''
     with connection.cursor() as cursor:
-        calculations = cursor.execute('SELECT * FROM executions ORDER BY id DESC LIMIT 10')
+        calculations = cursor.execute('SELECT * FROM calculations.executions ORDER BY id DESC LIMIT 10;')
         if calculations > 0:
             data = cursor.fetchall()
-        connection.close()
+        cursor.close()
         return data
 
 # main route
@@ -44,26 +44,26 @@ def calculation_result():
         color = 'alert-success'
 
         try:
-            if operator == 'addition':
+            if operator == '+':
                 result = first_number + second_number
                 note = f'{first_number} + {second_number} = {result}'
-            elif operator == 'subtract':
+            elif operator == '-':
                 result = first_number - second_number
                 note = f'{first_number} - {second_number} = {result}'
-            elif operator == 'multiply':
+            elif operator == 'x':
                 result = first_number * second_number
                 note = f'{first_number} * {second_number} = {result}'
-            elif operator == 'divide':
+            elif operator == '/':
                 result = first_number / second_number
                 note = f'{first_number} / {second_number} = {result}'
             
             with connection.cursor() as cursor:
-                sql_query = f'INSERT INTO executions(first_num, operator, second_num, result) VALUES ({first_number}, {operator}, {second_number}, {result})'
+                sql_query = f"INSERT INTO calculations.executions(first_num, operator, second_num, result) VALUES ({first_number}, '{operator}', {second_number}, {result});"
                 cursor.execute(sql_query)
                 connection.commit()
-                connection.close()
+                cursor.close()
         except:
-            note = sys.exc_info()[0]
+            note = sys.exc_info()
             color = 'alert-danger'
             return render_template('simple_calculator.html', note=note, color=color, results=get_calculations())
 
