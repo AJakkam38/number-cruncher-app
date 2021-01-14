@@ -2,7 +2,7 @@ from app import app
 import sys
 import time
 from flask import Flask, render_template, url_for, request
-import pymysql.cursors
+import pymysql
 
 
 # Connect to the database
