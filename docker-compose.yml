@@ -20,6 +20,9 @@ services:
     links:
       # network connection with these services
       - db
+    networks:
+      - backend-network
+      - frontend-network
 
   nginx:
     build: ./nginx
@@ -27,10 +30,13 @@ services:
     restart: always
     ports:
       - '80:80'
+    networks:
+      - frontend-network
 
   db:
     image: mysql:5.7
     container_name: db
+    command: --default-authentication-plugin=mysql_native_password
     ports:
       - '3306:3306'
     expose:
@@ -44,10 +50,14 @@ services:
       MYSQL_USER: jakkam
       MYSQL_PASSWORD: password
     volumes:
-      # pass volume named mysql-data to mysql container
-      - mysql-data:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
+    networks:
+      - backend-network
 
 volumes:
   # just a persistance data
   mysql-data:
-  
+networks:
+  backend-network:
+  frontend-network:
+    
