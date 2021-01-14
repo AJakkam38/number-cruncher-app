@@ -1,6 +1,5 @@
 from app import app
 import sys
-import time
 from flask import Flask, render_template, url_for, request
 import pymysql
 
@@ -25,12 +24,12 @@ def get_calculations():
         cursor.close()
         return data
 
+
 # main route
 @app.route('/')
 def main():
-    while True:
-        return render_template('simple_calculator.html', results=get_calculations())
-        time.sleep(5)
+    return render_template('simple_calculator.html', results=get_calculations())
+
 
 # calculations route        
 @app.route("/calculation_result", methods=['GET', 'POST'])
@@ -62,12 +61,12 @@ def calculation_result():
                 cursor.execute(sql_query)
                 connection.commit()
                 cursor.close()
+            return render_template('simple_calculator.html', note=note, color=color, results=get_calculations())
+
         except:
-            note = sys.exc_info()
+            note = sys.exc_info()[0]
             color = 'alert-danger'
             return render_template('simple_calculator.html', note=note, color=color, results=get_calculations())
 
-        while True:
-            return render_template('simple_calculator.html', note=note, color=color, results=get_calculations())
-            time.sleep(5)
-            
+    elif request.method == 'GET':
+        return render_template('simple_calculator.html', results=get_calculations())

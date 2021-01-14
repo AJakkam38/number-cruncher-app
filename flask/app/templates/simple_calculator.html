@@ -20,13 +20,13 @@ tr:nth-child(even) {
 </style>
 
 <form class="container" action="{{url_for('calculation_result')}}" method="POST">
-
+    <div class="container">
     <div class="row">
-        <div class="col-lg-2 col-md-3">
+        <div class="col-sm-4">
             <input type="number" name="firstNumber" class="form-control" placeholder="Insert First Number" required/>
         </div>
 
-        <div class="col-lg-2">
+        <div class="col-sm-4">
             <select id="selectOperation" name="operation" class="form-control" required>
                 <option value="">Select...</option>
                 <option value="+">+</option>
@@ -36,9 +36,10 @@ tr:nth-child(even) {
             </select>
         </div>
 
-        <div class="col-lg-2 col-md-3">
+        <div class="col-sm-4">
             <input type="number" name="secondNumber" class="form-control" placeholder="Insert Second Number" required/>
         </div>
+    </div>
     </div>
 
     <div class="row mt-3">
@@ -57,9 +58,9 @@ tr:nth-child(even) {
     <div class="container">
         <table style="width:100%">
             <tr>
-                <th>Input-1</th>
+                <th>First number</th>
                 <th>Operator</th>
-                <th>Input-2</th>
+                <th>Second number</th>
                 <th>Result</th>
             </tr>
 
