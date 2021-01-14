@@ -2,12 +2,24 @@ version: '3'
 
 services:
 
-  flask:
+  web:
     build: ./flask
     container_name: flask
     restart: always
     expose:
       - 8080
+    environment:
+      # set database credentials
+      DB_HOST: db
+      DB_NAME: calculations
+      DB_USER: jakkam
+      DB_PASSWORD: password
+    depends_on:
+      # build db image first
+      - db
+    links:
+      # network connection with these services
+      - db
 
   nginx:
     build: ./nginx
@@ -15,3 +27,27 @@ services:
     restart: always
     ports:
       - '80:80'
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    ports:
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+    restart: unless-stopped
+    environment:
+      # credentials
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: calculations
+      MYSQL_USER: jakkam
+      MYSQL_PASSWORD: password
+    volumes:
+      # pass volume named mysql-data to mysql container
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  # just a persistance data
+  mysql-data:
+  
