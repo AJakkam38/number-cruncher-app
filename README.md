@@ -50,7 +50,8 @@ CONTAINER ID        IMAGE                   COMMAND                  CREATED    
 a48d0b6bc0aa        mysql:5.7               "docker-entrypoint.s…"   About an hour ago   Up About an hour    0.0.0.0:3306->3306/tcp, 33060/tcp   db
 7bf6377aca37        number-cruncher_nginx   "/docker-entrypoint.…"   About an hour ago   Up About an hour    0.0.0.0:80->80/tcp                  nginx
 ```
-* Open up http://127.0.0.1/:80 or http://localhost/:80 to see your Flask app in action. You should see:
+* Open up http://127.0.0.1/ or http://localhost/ to see your Flask app in action. You should see:
+
 ![](images/nc-app.PNG)
 
 ## Stop and remove the containers in the end
