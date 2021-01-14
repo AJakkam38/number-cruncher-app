@@ -1,5 +1,4 @@
 from app import app
-import os
 import sys
 import time
 from flask import Flask, render_template, url_for, request
@@ -7,12 +6,13 @@ import pymysql.cursors
 
 
 # Connect to the database
-connection = pymysql.connect(host=os.getenv('DB_HOST'),
-                             user=os.getenv('DB_USER'),
-                             password=os.getenv('DB_PASSWORD'),
-                             db=os.getenv('DB_NAME'),
+connection = pymysql.connect(host='db',
+                             user='jakkam',
+                             password='password',
+                             db='calculations',
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)
+
 
 # Recent 10 calculations from db
 def get_calculations():

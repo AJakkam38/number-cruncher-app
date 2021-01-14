@@ -8,12 +8,6 @@ services:
     restart: always
     expose:
       - 8080
-    environment:
-      # set database credentials
-      DB_HOST: db
-      DB_NAME: calculations
-      DB_USER: jakkam
-      DB_PASSWORD: password
     depends_on:
       # build db image first
       - db
